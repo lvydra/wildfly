@@ -180,7 +180,8 @@ public class EjbInvocationStatisticsTestCase {
         {
             final ModelNode result = executeOperation(managementClient,
                     ModelDescriptionConstants.READ_RESOURCE_OPERATION, address);
-            assertTrue(result.get("wait-time").asLong() > 0L);
+            Long resultWaitTime = result.get("wait-time").asLong();
+            assertTrue("Wait time should be higher than 0 but is " + resultWaitTime, resultWaitTime > 0L);
         }
     }
 

@@ -30,7 +30,7 @@ public abstract class AbstractManagedBean implements BusinessInterface {
     @Override
     public void doIt() {
         try {
-            Thread.sleep(50);
+            Thread.sleep(75);
         } catch (InterruptedException e) {
         }
     }
