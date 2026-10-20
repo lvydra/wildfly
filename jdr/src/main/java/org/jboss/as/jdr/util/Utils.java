@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.io.IOException;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.jar.JarFile;
@@ -64,6 +65,17 @@ public final class Utils {
     public static byte[] toBytes(VirtualFile r) throws IOException {
         try(InputStream is = r.openStream()) {
             return toByteArray(is);
+        }
+    }
+
+    public static void digest(VirtualFile file, MessageDigest digest) throws IOException {
+        byte[] buffer = new byte[1024];
+        try (InputStream is = file.openStream()) {
+            int bytesRead = is.read(buffer);
+            while (bytesRead > -1) {
+                digest.update(buffer, 0, bytesRead);
+                bytesRead = is.read(buffer);
+            }
         }
     }
 
